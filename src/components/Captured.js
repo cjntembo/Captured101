@@ -7,7 +7,8 @@ import { Register } from "./auth/Register";
 import "./Captured.css"
 
 
-export const Captured = () => (
+export const Captured = () => {
+  return (
   <>
     <Route
       render={() => {
@@ -31,7 +32,8 @@ export const Captured = () => (
       <Register />
     </Route>
   </>
-)
+  )
+}
 
 
 // export const Captured = () => (

@@ -3,11 +3,11 @@ import React from "react"
 export const ApplicationViews = () => {
   return (
     <>
-      <ProfileProvider>
+      {/* <ProfileProvider>
         <Route exact path="/">
           <ProfileList />
         </Route>
-      </ProfileProvider>
+      </ProfileProvider> */}
     </>
   )
 }

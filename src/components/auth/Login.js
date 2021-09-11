@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { Captured } from "../Captured";
 import "./Login.css"
 
-const url = 'http://localhost:8088/'
+const url = 'http://localhost:8088'
 
 export const Login = props => {
   const email = useRef()
