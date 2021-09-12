@@ -9,6 +9,7 @@ export const Register = props => {
   const firstName = useRef()
   const lastName = useRef()
   const email = useRef()
+  const dateOfBirth = useRef()
   const verifyPassword = useRef()
   const conflictDialog = useRef()
   const history = useHistory()
@@ -25,15 +26,16 @@ export const Register = props => {
     existingUserCheck()
       .then((userExists) => {
         if (!userExists) {
-          fetch('${url}/customers', {
+          fetch('${url}/users', {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              email: `${props.user.email.current.value}`,
-              name: `${props.user.firstName.current.value} ${props.user.lastName.current.value}`,
-              dob: `${props.user.dob.current.value}`
+              email: `${email.current.value}`,
+              firstName: `${firstName.current.value}`,
+              lastName: `${lastName.current.value}`,
+              dateOfBirth: `${dateOfBirth.current.value}`
             })
           })
             .then(res => res.json())
@@ -61,13 +63,13 @@ export const Register = props => {
         <h1 className="h3 mb-3 font-weight-normal">Please Register for Captured</h1>
         <fieldset>
           <label htmlFor="firstName"> First Name </label>
-          <input ref={props.user.firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
+          <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First Name" required autoFocus />
           <label htmlFor="lastName"> Last Name </label>
-          <input ref={props.user.lastName} type="text" name="lastName" className="form-control" placeholder="Last Name" required />
+          <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last Name" required />
           <label htmlFor="inputEmail"> Email Address </label>
-          <input ref={props.user.email} type="text" name="email" className="form-control" placeholder="Email Address" required />
+          <input ref={email} type="text" name="email" className="form-control" placeholder="Email Address" required />
           <label htmlFor="dateOfBirth"> Date of Birth </label>
-          <input ref={props.user.dob} type="text" name="dob" className="form-control" placeholder="Date of Birth" required />
+          <input ref={dateOfBirth} type="text" name="dateOfBirth" className="form-control" placeholder="Date of Birth" required />
         </fieldset>
         <fieldset>
           <button type="submit"> Sign In </button>

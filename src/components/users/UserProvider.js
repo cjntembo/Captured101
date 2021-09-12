@@ -9,9 +9,9 @@ export const UserProvider = (props) => {
   const [searchTerms, setSearchTerms] = useState("")
 
   const getUsers = () => {
-    return fetch = (`${url}/users`)
-    .then(res => res.json())
-    .then(setUsers)
+    return fetch(`${url}/users`)
+      .then(res => res.json())
+      .then(setUsers)
   }
 
   const addUser = user => {
