@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory, useParams } from "react-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { UserContext } from "./UserProvider";
 import "./User.css"
 
 
 export const UserDetail = props => {
 
-  const {users, deleteUser} = useContext(useContext)
+  const {users, deleteUser} = useContext(UserContext)
   const history = useHistory()
 
-  const [ user, setUser ] = useState({ memory: {}, people: {} })
+  const [ user, setUser ] = useState({ user: {} })
 
   const handleRelease = () => {
-    releaseUser(props.user.id)
+    deleteUser(props.user.id)
       .then(() => {
         history.push("/users")
       })
@@ -20,7 +21,7 @@ export const UserDetail = props => {
   const { userId } = useParams();
 
   useEffect(() => {
-    const thisUser = users.find(user => user.id === parseInt(userId)) || { memory: {}, people: {} }
+    const thisUser = users.find(user => user.id === parseInt(userId)) || { user: {} }
     setUser(thisUser)
   }, [userId])
 
@@ -32,7 +33,7 @@ export const UserDetail = props => {
       }}>Edit</button>
       <h3 className="user__firstName">{props.user.firstName}</h3>
       <h3 className="user__lastName">{props.user.lastName}</h3>
-      <div className="user__dob">{props.user.dob}</div>
+      <div className="user__dateOfBirth">{props.user.dateOfBirth}</div>
       <div className="user__email">{props.user.email}</div>
     </section>
   )

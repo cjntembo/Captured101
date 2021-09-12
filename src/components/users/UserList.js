@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom'
-import "./User.css"
+import { useHistory } from 'react-router-dom';
 import { UserContext } from "./UserProvider";
+import { UserDetail } from "./UserDetail";
+import "./User.css"
 
 export const UserList = () => {
   const { users, getUsers, searchTerms } = useContext(UserContext)
