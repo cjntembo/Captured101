@@ -9,7 +9,7 @@ export const MemoryProvider = (props) => {
   const [searchTerms, setSearchTerms] = useState("")
 
   const getMemories = () => {
-    return fetch(`${url}/memories`)
+    return fetch(`${url}/memories?_expand=user.id`)
       .then(res => res.json())
       .then(setMemories)
   }

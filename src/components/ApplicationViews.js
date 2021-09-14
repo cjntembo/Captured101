@@ -28,8 +28,15 @@ export const ApplicationViews = () => {
 
             <Route exact path="/users">
               <UserList />
+              
+            </Route>
+            <Route exact path="/users/create">
               <UserForm />
             </Route>
+            <Route exact path="users/detail/:userId(\d+)">
+              <UserDetail />
+            </Route>
+
 
             <Route exact path="/peoples">
               <PeopleList />

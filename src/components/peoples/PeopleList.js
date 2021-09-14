@@ -27,8 +27,9 @@ export const PeopleList = () => {
     <>
       <h1>People</h1>
 
-      <button onClick={() => history.push("/peoples/create")}>
-        Make Person
+      <button onClick={
+        () => history.push("/peoples/create")}>
+        Create Your Person
       </button>
 
       <div className="peoples">

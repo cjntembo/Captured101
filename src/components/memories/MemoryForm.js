@@ -7,13 +7,13 @@ import { UserContext } from "../users/UserProvider";
 export const MemoryForm = () => {
   const { addMemory, getMemories, getMemoryById, updateMemory } = useContext(MemoryContext)
   const { users, getUsers} = useContext(UserContext)
-  const [ isLoading, setIsLoading ] = useState(true);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const [ memory, setMemory ] = useState({
     memory: "",
     date: "",
     notes: "",
-    userId: 0
+    userId: localStorage.getItem("captured_user")
   });
 
   const {memoryId} = useParams();
@@ -21,7 +21,7 @@ export const MemoryForm = () => {
 
   const handleControlledInputChange = (event) => {
     const newMemory = { ...memory }
-    newMemory[event.target.memoryId] = event.target.value
+    newMemory[event.target.id] = event.target.value
     setMemory(newMemory)
   }
 
@@ -38,7 +38,7 @@ export const MemoryForm = () => {
           notes: memory.notes,
           userId: parseInt(memory.userId)
         })
-        .then(() => history.push("/users"))
+        .then(() => history.push("/memories"))
       } else {
         addMemory({
           memory: memory.memory,
@@ -46,6 +46,7 @@ export const MemoryForm = () => {
           notes: memory.notes,
           userId: memory.userId
         })
+        .then(()=> history.push("/memories"))
       }
     }
   }
@@ -59,7 +60,7 @@ export const MemoryForm = () => {
           setIsLoading(false)
         })
       } else {
-        setIsLoading(true)
+        setIsLoading(false)
       }
     })
   }, [])
@@ -79,7 +80,7 @@ export const MemoryForm = () => {
       <fieldset>
          <div className="form-group">
            <label htmlFor="date"> Date: </label>
-           <input type="text" id="date" name="date" required autoFocus className="form-control" placeholder="Date of Memory" defaultValue={memory.date} onChange={handleControlledInputChange} />
+           <input type="date" id="date" name="date" required autoFocus className="form-control" placeholder="Date of Memory" defaultValue={memory.date} onChange={handleControlledInputChange} />
          </div>
       </fieldset>
       <fieldset>
@@ -94,7 +95,7 @@ export const MemoryForm = () => {
           event.preventDefault() // Prevent browser from submitting the form and refreshing the page
           handleSaveMemory()
         }}>
-      memoryId ? <>Save My Memory</></button>
+      {memoryId ? <>Save My Memory</> : <>Add Memory</>}</button>
     </form>
   )
 

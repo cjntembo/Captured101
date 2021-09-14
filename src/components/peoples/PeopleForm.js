@@ -5,7 +5,7 @@ import "./People.css"
 
 export const PeopleForm = () => {
   const { addPeople, getPeoples, getPeopleById, updatePeople } = useContext(PeopleContext)
-  const [ isLoading, setIsLoading ] = useState(true);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const [ people, setPeople ] = useState({
     firstName: "",
@@ -14,7 +14,7 @@ export const PeopleForm = () => {
     notes: "",
     date: "",
     dateType: "",
-    userId: 0
+    userId: localStorage.getItem("captured_user")
   });
 
   const {peopleId} = useParams();
@@ -22,13 +22,13 @@ export const PeopleForm = () => {
 
   const handleControlledInputChange = (event) => {
     const newPeople = { ...people }
-    newPeople[event.target.email] = event.target.value
+    newPeople[event.target.id] = event.target.value
     setPeople(newPeople)
   }
 
   const handleSaveUser = () => {
     if (parseInt(peopleId) === 0) {
-      window.alert("Please Select Your Person")
+      window.alert("Please Add Your Person")
     } else {
       setIsLoading(true);
       if (peopleId) {
@@ -42,7 +42,7 @@ export const PeopleForm = () => {
           dateType: people.dateType,
           userId: parseInt(people.userId)
         })
-        .then(() => history.push("/peoples"))
+        .then(() => history.push(`/peoples`))
       } else {
         addPeople({
           firstName: people.firstName,
@@ -67,7 +67,7 @@ export const PeopleForm = () => {
           setIsLoading(false)
         })
       } else {
-        setIsLoading(true)
+        setIsLoading(false)
       }
     })
   }, [])
@@ -99,13 +99,19 @@ export const PeopleForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="date"> Date to Remember: </label>
-          <input type="text" id="date" name="date" required autoFocus className="form-control" placeholder="Date to Remember" defaultValue={people.date} onChange={handleControlledInputChange} />
+          <input type="date" id="date" name="date" required autoFocus className="form-control" placeholder="Date to Remember" defaultValue={people.date} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>
         <div className="form-group">
           <label htmlFor="dateType"> Date Type: </label>
           <input type="text" id="dateType" name="dateType" required autoFocus className="form-control" placeholder="Date Type" defaultValue={people.dateType} onChange={handleControlledInputChange} />
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="notes"> Notes: </label>
+          <input type="text" id="notes" name="notes" required autoFocus className="form-control" placeholder="notes" defaultValue={people.notes} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <button className="btn btn-primary"
