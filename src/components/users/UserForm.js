@@ -5,7 +5,7 @@ import { UserContext } from "./UserProvider";
 
 export const UserForm = () => {
   const { getUsers, getUserById, updateUser } = useContext(UserContext)
-  const [ isLoading, setIsLoading ] = useState(true);
+  const [ isLoading, setIsLoading ] = useState(false);
 
   const [ user, setUser ] = useState({
     firstName: "",
@@ -19,7 +19,7 @@ export const UserForm = () => {
 
   const handleControlledInputChange = (event) => {
     const newUser = { ...user }
-    newUser[event.target.email] = event.target.value
+    newUser[event.target.id] = event.target.value
     setUser(newUser)
   }
 
@@ -49,7 +49,7 @@ export const UserForm = () => {
           setIsLoading(false)
         })
       } else {
-        setIsLoading(true)
+        setIsLoading(false)
       }
     })
   }, [])
@@ -73,6 +73,12 @@ export const UserForm = () => {
          </div>
       </fieldset>
       <fieldset>
+         <div className="form-group">
+           <label htmlFor="email"> Email: </label>
+           <input type="email" id="email" name="email" required autoFocus className="form-control" placeholder="Email Address" defaultValue={user.email} onChange={handleControlledInputChange} />
+         </div>
+      </fieldset>
+      <fieldset>
         <div className="form-group">
           <label htmlFor="dateOfBirth"> Date of Birth: </label>
           <input type="text" id="dateOfBirth" name="dateOfBirth" required autoFocus className="form-control" placeholder="Date of Birth" defaultValue={user.dateOfBirth} onChange={handleControlledInputChange} />
@@ -84,7 +90,7 @@ export const UserForm = () => {
           event.preventDefault() // Prevent browser from submitting the form and refreshing the page
           handleSaveUser()
         }}>
-      userId ? <>Save User</></button>
+      {userId ? <>Save User</> : <>Add User</>}</button>
     </form>
   )
 

@@ -5,6 +5,8 @@ import { NavBar } from "./Nav/NavBar";
 import { Login } from "./auth/Login";
 import { Register } from "./auth/Register";
 import "./Captured.css"
+import { PeopleProvider } from "./peoples/PeopleProvider";
+import { PeopleForm } from "./peoples/PeopleForm";
 
 
 export const Captured = () => {

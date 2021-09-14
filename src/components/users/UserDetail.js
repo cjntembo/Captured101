@@ -28,9 +28,6 @@ export const UserDetail = props => {
   return (
     <section className="user">
       <button onClick={handleRelease}>Delete User</button>
-      <button onClick={() => {
-        history.push(`/users/edit/${props.user.id}`)
-      }}>Edit</button>
       <h3 className="user__firstName">{props.user.firstName}</h3>
       <h3 className="user__lastName">{props.user.lastName}</h3>
       <div className="user__dateOfBirth">{props.user.dateOfBirth}</div>

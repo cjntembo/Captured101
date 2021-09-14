@@ -14,6 +14,8 @@ export const Register = props => {
   const conflictDialog = useRef()
   const history = useHistory()
 
+  
+
   const existingUserCheck = () => {
     return fetch(`${url}/users?email=${email.current.value}`)
       .then(res => res.json())
@@ -22,27 +24,28 @@ export const Register = props => {
 
   const handleRegister = (e) => {
     e.preventDefault()
+console.log(email.current.value)
 
     existingUserCheck()
       .then((userExists) => {
         if (!userExists) {
-          fetch('${url}/users', {
+          fetch(`${url}/users`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
             },
             body: JSON.stringify({
-              email: `${email.current.value}`,
-              firstName: `${firstName.current.value}`,
-              lastName: `${lastName.current.value}`,
-              dateOfBirth: `${dateOfBirth.current.value}`
+              email: email.current.value,
+              firstName: firstName.current.value,
+              lastName: lastName.current.value,
+              dateOfBirth: dateOfBirth.current.value
             })
           })
             .then(res => res.json())
             .then(createdUser => {
               if (createdUser.hasOwnProperty("id")) {
                 localStorage.setItem("captured_user", createdUser.id)
-                history.push("/")
+                history.push("/users")
               }
             })
         } else {
@@ -67,9 +70,9 @@ export const Register = props => {
           <label htmlFor="lastName"> Last Name </label>
           <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last Name" required />
           <label htmlFor="inputEmail"> Email Address </label>
-          <input ref={email} type="text" name="email" className="form-control" placeholder="Email Address" required />
+          <input ref={email} type="email" name="email" className="form-control" placeholder="Email Address" required />
           <label htmlFor="dateOfBirth"> Date of Birth </label>
-          <input ref={dateOfBirth} type="text" name="dateOfBirth" className="form-control" placeholder="Date of Birth" required />
+          <input ref={dateOfBirth} type="date" name="dateOfBirth" className="form-control" placeholder="Date of Birth" required />
         </fieldset>
         <fieldset>
           <button type="submit"> Sign In </button>

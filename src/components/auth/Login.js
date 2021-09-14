@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { useHistory, Link } from "react-router-dom"
-import { Captured } from "../Captured";
 import "./Login.css"
 
 const url = 'http://localhost:8088'

@@ -27,10 +27,6 @@ export const UserList = () => {
     <>
       <h1>USERS</h1>
 
-      <button onClick={() => history.push("/users/create")}>
-        Make User
-      </button>
-
       <div className="users">
         {
           filteredUsers.map(user => {
