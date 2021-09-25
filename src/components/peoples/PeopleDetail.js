@@ -26,18 +26,24 @@ export const PeopleDetail = props => {
   }, [peopleId])
 
   return (
-    <section className="people">
-      <button onClick={handleRelease}>Delete Person</button>
-      <button onClick={() => {
-        history.push(`/peoples/edit/${props.people.id}`)
-      }}>Edit</button>
-      <h3 className="people__firstName">{props.people.firstName}</h3>
-      <h3 className="people__lastName">{props.people.lastName}</h3>
-      <div className="people__date">{props.people.date}</div>
-      <div className="people__dateType">{props.people.dateType}</div>
-      <div className="people__relationship">{props.people.relationship}</div>
-      <div className="people__notes">{props.people.notes}</div>
-    </section>
+    <>
+    <div className="peoples">
+    <fieldset className="peoples">
+      <section className="people">
+        <button onClick={handleRelease}>Delete Person</button>
+        <button onClick={() => {
+          history.push(`/peoples/edit/${props.people.id}`)
+        }}>Edit</button>
+        <h3 className="people__firstName">{props.people.firstName}</h3>
+        <h3 className="people__lastName">{props.people.lastName}</h3>
+        <div className="people__date">{props.people.date}</div>
+        <div className="people__dateType">{props.people.dateType}</div>
+        <div className="people__relationship">{props.people.relationship}</div>
+        <div className="people__notes">{props.people.notes}</div>
+      </section>
+    </fieldset>
+    </div>
+    </>
   )
 
 }

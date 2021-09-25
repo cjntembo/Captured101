@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { MemoryContext } from "./MemoryProvider";
-import "./Memory.css"
 import { UserContext } from "../users/UserProvider";
+import "./Memory.css"
 
 export const MemoryForm = () => {
-  const { addMemory, getMemories, getMemoryById, updateMemory } = useContext(MemoryContext)
+  const { memories, addMemory, getMemories, getMemoryById, updateMemory } = useContext(MemoryContext)
   const { users, getUsers} = useContext(UserContext)
   const [ isLoading, setIsLoading ] = useState(false);
 
@@ -13,7 +13,7 @@ export const MemoryForm = () => {
     memory: "",
     date: "",
     notes: "",
-    userId: localStorage.getItem("captured_user")
+    usersId: localStorage.getItem("captured_user")
   });
 
   const {memoryId} = useParams();
@@ -36,7 +36,7 @@ export const MemoryForm = () => {
           memory: memory.memory,
           date: memory.date,
           notes: memory.notes,
-          userId: parseInt(memory.userId)
+          usersId: parseInt(memory.usersId)
         })
         .then(() => history.push("/memories"))
       } else {
@@ -44,24 +44,23 @@ export const MemoryForm = () => {
           memory: memory.memory,
           date: memory.date,
           notes: memory.notes,
-          userId: memory.userId
+          usersId: parseInt(memory.usersId)
         })
         .then(()=> history.push("/memories"))
       }
     }
   }
 
+  
   useEffect(() => {
-    getMemories().then(getUsers).then(() => {
+    const userId = localStorage.getItem("captured_user")
+    getMemories(parseInt(userId)).then(() => {
       if(memoryId){
         getMemoryById(memoryId)
         .then(memory => {
           setMemory(memory)
-          setIsLoading(false)
         })
-      } else {
-        setIsLoading(false)
-      }
+      } 
     })
   }, [])
 
@@ -99,6 +98,42 @@ export const MemoryForm = () => {
     </form>
   )
 
+  // return (
+  //   <>
+  //     <section>
+  //       {
+  //         memories.map(memory => {
+  //           return (
+  //             <Row xs={1} md={2} className="g-4">
+  //               {Array.from({ length: 1 }).map((_, idx) => (
+  //                 <Col>
+  //                   <Card border="primary" style={{ width: '18rem' }}>
+  //                     <Card.Img className="top" src="holder.js/100px180" />
+  //                     <Card.Body>
+  //                       <Card.Title>My Memory</Card.Title>
+  //                       <Card.Text onChange={handleControlledInputChange}>
+  //                         {memory.memory}
+  //                       </Card.Text>
+  //                       <Card.Text onChange={handleControlledInputChange}>
+  //                         {memory.date}
+  //                       </Card.Text>
+  //                       <Card.Text onChange={handleControlledInputChange}>
+  //                         {memory.notes}
+  //                       </Card.Text>
+  //                       <Button className="primary" onClick={event => {
+  //                         event.preventDefault()
+  //                         handleSaveMemory()
+  //                       }}>{memoryId ? <>Save My Memory</> : <>Add Memory</>}</Button>
+  //                     </Card.Body>
+  //                   </Card>
+  //                 </Col>
+  //               ))}
+  //             </Row>
+  //           )
+  //         })
+  //       }
+  //     </section>
+  //   </>
 
-
+  // )
 }

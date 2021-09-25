@@ -7,19 +7,21 @@ import "./People.css"
 export const PeopleList = () => {
   const { peoples, getPeoples, searchTerms } = useContext(PeopleContext)
 
-  const [ filteredPeoples, setFiltered ] = useState([])
+  const [ filteredPeoples, setFilteredPeoples ] = useState([])
   const history = useHistory()
 
   useEffect(() => {
-    getPeoples()
+    getPeoples(parseInt(localStorage.getItem("captured_user"))).then(() => {
+      setFilteredPeoples(peoples)
+    })
   }, [])
 
   useEffect(() => {
     if (searchTerms !== "") {
       const subset = peoples.filter(people => people.firstName.toLowerCase().includes(searchTerms))
-      setFiltered(subset)
+      setFilteredPeoples(subset)
     } else {
-      setFiltered(peoples)
+      setFilteredPeoples(peoples)
     }
   }, [searchTerms, peoples])
 

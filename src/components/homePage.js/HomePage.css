@@ -1,0 +1,7 @@
+.dateSearch,
+.input--wide {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: flex-end;
+}

@@ -1,0 +1,17 @@
+h1 {
+  text-align: center;
+  
+}
+
+.peoples {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+.people {
+  border: 30rem;
+  border-color: crimson;
+
+}

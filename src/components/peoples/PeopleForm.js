@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { PeopleContext } from "./PeopleProvider";
+
 import "./People.css"
 
 export const PeopleForm = () => {
-  const { addPeople, getPeoples, getPeopleById, updatePeople } = useContext(PeopleContext)
+  const { peoples, addPeople, getPeoples, getPeopleById, updatePeople } = useContext(PeopleContext)
   const [ isLoading, setIsLoading ] = useState(false);
 
   const [ people, setPeople ] = useState({
@@ -14,7 +15,7 @@ export const PeopleForm = () => {
     notes: "",
     date: "",
     dateType: "",
-    userId: localStorage.getItem("captured_user")
+    usersId: localStorage.getItem("captured_user")
   });
 
   const {peopleId} = useParams();
@@ -40,7 +41,7 @@ export const PeopleForm = () => {
           notes: people.notes,
           date: people.date,
           dateType: people.dateType,
-          userId: parseInt(people.userId)
+          usersId: parseInt(people.usersId)
         })
         .then(() => history.push(`/peoples`))
       } else {
@@ -51,7 +52,7 @@ export const PeopleForm = () => {
           notes: people.notes,
           date: people.date,
           dateType: people.dateType,
-          userId: people.userId
+          usersId: parseInt(people.usersId)
         })
         .then(() => history.push("/peoples"))
       }
@@ -59,15 +60,13 @@ export const PeopleForm = () => {
   }
 
   useEffect(() => {
-    getPeoples().then(() => {
+    const userId = localStorage.getItem("captured_user")
+    getPeoples(parseInt(userId)).then(() => {
       if(peopleId){
         getPeopleById(peopleId)
         .then(people => {
           setPeople(people)
-          setIsLoading(false)
         })
-      } else {
-        setIsLoading(false)
       }
     })
   }, [])

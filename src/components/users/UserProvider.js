@@ -25,14 +25,14 @@ export const UserProvider = (props) => {
     .then(res => res.json())
   }
 
-  const getUserById = userId => {
-    return fetch(`${url}/users/${userId}`
+  const getUserById = usersId => {
+    return fetch(`${url}/users/${usersId}`
     )
     .then(res =>res.json())
   }
 
-  const deleteUser = userId => {
-    return fetch(`${url}/users/${userId}`, {
+  const deleteUser = usersId => {
+    return fetch(`${url}/users/${usersId}`, {
       method: "DELETE"
     })
     .then(getUsers)

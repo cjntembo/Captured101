@@ -8,8 +8,8 @@ export const PeopleProvider = (props) => {
   const [peoples, setPeoples] = useState([])
   const [searchTerms, setSearchTerms] = useState("")
 
-  const getPeoples = () => {
-    return fetch(`${url}/peoples?_expand=user.id`)
+  const getPeoples = (id) => {
+    return fetch(`${url}/peoples?_expand=users&usersId=${id}`)
       .then(res => res.json())
       .then(setPeoples)
   }

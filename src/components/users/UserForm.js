@@ -14,7 +14,7 @@ export const UserForm = () => {
     email: ""
   });
 
-  const {userId} = useParams();
+  const {usersId} = useParams();
   const history = useHistory();
 
   const handleControlledInputChange = (event) => {
@@ -24,11 +24,11 @@ export const UserForm = () => {
   }
 
   const handleSaveUser = () => {
-    if (parseInt(userId) === 0) {
+    if (parseInt(usersId) === 0) {
       window.alert("Please Select a User")
     } else {
       setIsLoading(true);
-      if (userId) {
+      if (usersId) {
         updateUser({
           id: user.id,
           firstName: user.firstName,
@@ -42,8 +42,8 @@ export const UserForm = () => {
 
   useEffect(() => {
     getUsers().then(() => {
-      if(userId){
-        getUserById(userId)
+      if(usersId){
+        getUserById(usersId)
         .then(user => {
           setUser(user)
           setIsLoading(false)
@@ -90,7 +90,7 @@ export const UserForm = () => {
           event.preventDefault() // Prevent browser from submitting the form and refreshing the page
           handleSaveUser()
         }}>
-      {userId ? <>Save User</> : <>Add User</>}</button>
+      {usersId ? <>Save User</> : <>Add User</>}</button>
     </form>
   )
 
