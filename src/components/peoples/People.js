@@ -2,7 +2,7 @@ import React from "react";
 import "./People.css"
 
 export const People = () => (
-  <section className="people">
+  <section className="peoples">
     <h3 className="people__firstName">DeeDee</h3>
     <h4 className="people__lastName">Jones</h4>
     <div className="people__relationship">Sibling</div>

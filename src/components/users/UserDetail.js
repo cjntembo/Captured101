@@ -18,12 +18,12 @@ export const UserDetail = props => {
       })
   }
 
-  const { userId } = useParams();
+  const { usersId } = useParams();
 
   useEffect(() => {
-    const thisUser = users.find(user => user.id === parseInt(userId)) || { user: {} }
+    const thisUser = users.find(user => user.id === parseInt(usersId)) || { user: {} }
     setUser(thisUser)
-  }, [userId])
+  }, [usersId])
 
   return (
     <section className="user">

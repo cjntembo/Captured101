@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom"
-// import "bootstrap/dist/css/bootstrap.main.css"
+import { Nav, Button } from "react-bootstrap";
+import "./NavBar.css"
 
 export const NavBar = (props) => {
 
@@ -12,19 +13,12 @@ export const NavBar = (props) => {
   }
 
   return (
-      <ul className="navbar nav-pills nav-fill">
-        <li className="navbar__item active">
-          <Link className="navbar__link" to="/">Captured</Link>
-        </li>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/peoples">My People</Link>
-        </li>
-        <li className="navbar__item">
-          <Link className="navbar__link" to="/memories">My Memories</Link>
-        </li>
-        <li className="navbar__item">
-          <button className="navbar__link" onClick={logout}>Log Out</button>
-        </li>
-      </ul>
+    <Nav defaultActiveKey="/home" className="justify-content-center">
+      <Nav.Link href="/">Captured</Nav.Link>
+      <Nav.Link href="/profiles">My Profile</Nav.Link>
+      <Nav.Link href="/peoples">My People</Nav.Link>
+      <Nav.Link href="/memories">My Memories</Nav.Link>
+      <Button variant="primary" onClick={logout} size="sm">Log Out</Button>
+    </Nav>
   )
 }

@@ -7,19 +7,21 @@ import "./Memory.css"
 export const MemoryList = () => {
   const { memories, getMemories, searchTerms } = useContext(MemoryContext)
 
-  const [ filteredMemories, setFiltered ] = useState([])
+  const [ filteredMemories, setFilteredMemories ] = useState([])
   const history = useHistory()
 
   useEffect(() => {
-    getMemories()
+    getMemories(parseInt(localStorage.getItem("captured_user"))).then(() => {
+      setFilteredMemories(memories) 
+    })
   }, [])
 
   useEffect(() => {
     if (searchTerms !== "") {
       const subset = memories.filter(memory => memory.memory.toLowerCase().includes(searchTerms))
-      setFiltered(subset)
+      setFilteredMemories(subset)
     } else {
-      setFiltered(memories)
+      setFilteredMemories(memories)
     }
   }, [searchTerms, memories])
 
