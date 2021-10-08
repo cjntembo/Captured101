@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState} from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { ProfileContext, ProfileProvider } from "./ProfileProvider";
+import { ProfileContext } from "./ProfileProvider";
 
 
 export const ProfileDetail = props => {
-  debugger
+  
   const { profiles, deleteProfile } = useContext(ProfileContext)
   const history = useHistory()
 
@@ -18,19 +18,22 @@ export const ProfileDetail = props => {
   }
 
   const { profileId } = useParams();
+
  useEffect(() => {
-   const thisProfile = profiles.find(profile => profile.id === parseInt(profileId)) || { user: {} }
+   const thisProfile = profiles.find(profile => profile.id === parseInt(profileId)) || { profile: {} }
    setProfile(thisProfile)
  }, [profileId])
 
   return (
     <>
+      <div className="profiles">
       <button onClick={handleRelease}>Delete Your Profile!!!</button>
       <button onClick={() => {
         history.push(`/profiles/edit/${props.profile.id}`)
       }}>Edit Your Profile</button>
-        <h3 className="profile__picture"> { props.profile.picture } </h3>
+        <img src={profile.picture} className="profile__picture" width="300px" height="350px" />
         <div className="profile__quote"> { props.profile.quote } </div>
+        </div>
     </>
   )
 

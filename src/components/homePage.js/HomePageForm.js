@@ -1,20 +1,49 @@
-import react from "react";
-import { Card } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { MemoryDetail } from "../memories/MemoryDetail";
+import { MemoryContext } from "../memories/MemoryProvider";
+import { PeopleDetail } from "../peoples/PeopleDetail";
 import "./HomePage.css"
+import { HomePageContext } from "./HomePageProvider";
+
+
+
 
 
 export const HomePageForm = () => {
-  return null
-{/* <Card style={{ width: '18rem' }}>
-  <Card.Img variant="top" src="holder.js/100px180" />
-  <Card.Body>
-    <Card.Title>Card Title</Card.Title>
-    <Card.Text>
-      Some quick example text to build on the card title and make up the bulk of
-      the card's content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>
-) */}
-  }
+
+  const { fetchMemories, fetchPeoples, homePageMemories, homePagePeoples } = useContext(HomePageContext)
+  const [ homePageData, setHomePage ] = useState([])
+  
+
+  useEffect(() => {
+    const userId = localStorage.getItem("captured_user")
+    fetchMemories(parseInt(userId)).then(fetchPeoples)
+  }, [])
+
+  useEffect (() => {
+    // debugger
+      setHomePage(homePageMemories.concat(homePagePeoples))
+    
+  },[homePageMemories, homePagePeoples])
+
+  return (
+    <>
+    <div className="data">
+      {
+      homePageData.map(data => {
+        if (data.memory) {
+          return (
+          <MemoryDetail key={data.id} memory={data} />
+          )
+        } 
+        else {
+          return (
+          <PeopleDetail key={data.id} people={data} />
+      )}
+    })
+      }
+    </div>
+    </>
+  )
+} 
+

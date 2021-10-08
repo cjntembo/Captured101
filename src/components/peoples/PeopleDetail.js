@@ -9,7 +9,9 @@ export const PeopleDetail = props => {
   const {peoples, deletePeople} = useContext(PeopleContext)
   const history = useHistory()
 
-  const [ people, setPeople ] = useState({ people: {} })
+  // const [ people, setPeople ] = useState({ people: {} })
+  const { people } = props
+  
 
   const handleRelease = () => {
     deletePeople(props.people.id)
@@ -18,16 +20,16 @@ export const PeopleDetail = props => {
       })
   }
 
-  const { peopleId } = useParams();
+  // const { peopleId } = useParams();
 
-  useEffect(() => {
-    const thisPeople = peoples.find(people => people.id === parseInt(peopleId)) || { people: {} }
-    setPeople(thisPeople)
-  }, [peopleId])
+  // useEffect(() => {
+  //   const thisPeople = peoples.find(people => people.id === parseInt(peopleId)) || { people: {} }
+  //   setPeople(thisPeople)
+  // }, [peopleId])
 
   return (
     <>
-    <div className="peoples">
+    {/* <div className="peoples">
     <fieldset className="peoples">
       <section className="people">
         <button onClick={handleRelease}>Delete Person</button>
@@ -40,6 +42,23 @@ export const PeopleDetail = props => {
         <div className="people__dateType">{props.people.dateType}</div>
         <div className="people__relationship">{props.people.relationship}</div>
         <div className="people__notes">{props.people.notes}</div>
+      </section>
+    </fieldset>
+    </div> */}
+
+    <div className="peoples">
+    <fieldset className="peoples">
+      <section className="people">
+        <button onClick={handleRelease}>Delete Person</button>
+        <button onClick={() => {
+          history.push(`/peoples/edit/${people.id}`)
+        }}>Edit</button>
+        <h3 className="people__firstName">{people.firstName}</h3>
+        <h3 className="people__lastName">{people.lastName}</h3>
+        <div className="people__date">{people.date}</div>
+        <div className="people__dateType">{people.dateType}</div>
+        <div className="people__relationship">{people.relationship}</div>
+        <div className="people__notes">{people.notes}</div>
       </section>
     </fieldset>
     </div>

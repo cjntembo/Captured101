@@ -35,7 +35,7 @@ export const ProfileForm = () => {
           quote: profile.quote,
           usersId: profile.usersId
         })
-        .then(() => history.push("/profiles"))
+        .then(() => history.push(`/profiles`))
       } else {
         addProfile({
           picture: profile.picture,

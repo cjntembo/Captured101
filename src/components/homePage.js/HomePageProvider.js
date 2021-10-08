@@ -7,17 +7,31 @@ export const HomePageContext = createContext()
 
 export const HomePageProvider = props => {
   const [ homePage, setHomePage ] = useState([])
+  const [ homePageMemories, setHomePageMemories ] = useState([])
+  const [ homePagePeoples, setHomePagePeoples ] = useState([])
   const [ searchTerms, setSearchTerms] = useState("")
 
   const getHomePage = () => {
-    return fetch(`$(url)/homepage`)
+    return fetch(`${url}/homepage`)
     .then(res => res.json())
     .then(setHomePage)
   }
 
+  const fetchPeoples = async() => {
+    return fetch(`${url}/peoples?_sort=date&_order=desc&_limit=7`)
+    .then(res => res.json())
+    .then(setHomePagePeoples)
+  };
+
+  const fetchMemories = async() => {
+    return fetch(`${url}/memories?_sort=date&_order=desc&_limit=7`)
+    .then(res => res.json())
+    .then(setHomePageMemories)
+  };
+
   return (
     <HomePageContext.Provider value={{
-      homePage, getHomePage, searchTerms, setSearchTerms
+      homePageMemories, homePagePeoples, getHomePage, searchTerms, setSearchTerms, fetchPeoples, fetchMemories
     }}>
       {props.children}
     </HomePageContext.Provider>
