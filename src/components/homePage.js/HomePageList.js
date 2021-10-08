@@ -14,14 +14,19 @@ export const HomePageList = () => {
   const history = useHistory()
   const [ filteredDates, setFilteredDates ] = useState([])
   const userId = parseInt(localStorage.getItem("captured_user"))
-  
+
 
   useEffect(() => {
     getPeoples(userId).then(getMemories(userId)).then(() => {
     if (searchTerms !== "") {
-      const subsetPeople = peoples.filter(person =>{person.date.includes(searchTerms)})
-      const subsetMemory = memories.filter(memory => {memory.date.includes(searchTerms)})
+      // const subsetPeople = peoples.filter(person =>{person.date.includes(searchTerms)}) || ([])
+      // const subsetMemory = memories.filter(memory => {memory.date.includes(searchTerms)}) || ([])
+      const subsetMemory = memories.filter(memory => {return memory.date === (searchTerms)}) || ([])
+      const subsetPeople = peoples.filter(people =>{return people.date === (searchTerms)}) || ([])
+      
       setFilteredDates(subsetPeople.concat(subsetMemory))
+    } else {
+      setFilteredDates([])
     }
   })
   }, [searchTerms])
@@ -29,7 +34,7 @@ export const HomePageList = () => {
   // useEffect (() => {
   //   getPeoples(parseInt(localStorage.getItem("captured_user"))).then(getMemories)
   // })
-
+  console.log(filteredDates)
   return (
     <>
     {/* <div className="dateSearch">
@@ -38,12 +43,16 @@ export const HomePageList = () => {
     <div className="dates">
       {
       filteredDates.map(date => {
-        return (
-          <>
-          <PeopleDetail key={peoples.id} peoples={peoples} />
-          <MemoryDetail key={memories.id} memories={memories} />
-          </>
-      )})
+        if (date.memory) {
+          return (
+          <MemoryDetail key={date.id} memory={date} />
+          )
+        } 
+        else {
+          return (
+          <PeopleDetail key={date.id} people={date} />
+      )}
+    })
       }
     </div>
     </>

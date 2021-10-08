@@ -14,6 +14,7 @@ export const NavBar = (props) => {
 
   return (
     <Nav defaultActiveKey="/home" className="justify-content-center">
+      {/* <img src="src/components/auth/logo.png" alt="memory loss by Gan Khoon Lay from the Noun Project" /> */}
       <Nav.Link href="/">Captured</Nav.Link>
       <Nav.Link href="/profiles">My Profile</Nav.Link>
       <Nav.Link href="/peoples">My People</Nav.Link>

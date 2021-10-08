@@ -40,6 +40,7 @@ export const ApplicationViews = () => {
                 <Route exact path="/">
                   <HomePageList />
                   <HomePageSearch />
+                  <HomePageForm />
                 </Route>
                
 
@@ -64,7 +65,7 @@ export const ApplicationViews = () => {
                 <Route exact path="/profiles/edit/:profileId(\d+)">
                   <ProfileForm />
                 </Route>
-                <Route exact path="profiles/detail/:profileId(\d+)">
+                <Route exact path="/profiles/detail/:profileId(\d+)">
                   <ProfileDetail />
                 </Route>
 

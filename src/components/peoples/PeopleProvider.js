@@ -9,7 +9,7 @@ export const PeopleProvider = (props) => {
   const [searchTerms, setSearchTerms] = useState("")
 
   const getPeoples = (id) => {
-    return fetch(`${url}/peoples?_expand=users&usersId=${id}`)
+    return fetch(`${url}/peoples`)
       .then(res => res.json())
       .then(setPeoples)
   }

@@ -7,9 +7,9 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Captured />
-    </Router>
+      <Router>
+        <Captured />
+      </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );

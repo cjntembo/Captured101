@@ -5,3 +5,8 @@
   justify-content: flex-end;
   align-content: flex-end;
 }
+.dates {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
