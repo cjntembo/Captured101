@@ -7,11 +7,13 @@ export const MemorySearch = () => {
 
   return (
     <>
+    <div className="memSearch">
       Memory search:
       <input type="text"
         className="input--wide"
         onKeyUp={(event) => setSearchTerms(event.target.value)}
         placeholder="Search for A Memory's... " />
+    </div>
     </>
   )
 }

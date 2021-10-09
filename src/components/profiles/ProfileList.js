@@ -6,7 +6,7 @@ import { ProfileDetail } from "./ProfileDetail";
 
 
 export const ProfileList = () => {
-  const { getProfileById, getProfiles,} = useContext(ProfileContext)
+  const { getProfileById, getProfiles} = useContext(ProfileContext)
   const [ profile, setProfile ] = useState([])
   const [ profiles ] = useState([])
   
@@ -26,9 +26,11 @@ export const ProfileList = () => {
 
   return (
     <>
+    <div className="profile_button">
       <button onClick={() => history.push("/profiles/create")}>
         Create Profile
       </button>
+      </div>
       <h1>Your Profile</h1>
       <div className="profiles">
         <section className="profile">

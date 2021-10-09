@@ -49,16 +49,16 @@ export const PeopleDetail = props => {
     <div className="peoples">
     <fieldset className="peoples">
       <section className="people">
-        <button onClick={handleRelease}>Delete Person</button>
-        <button onClick={() => {
-          history.push(`/peoples/edit/${people.id}`)
-        }}>Edit</button>
         <h3 className="people__firstName">{people.firstName}</h3>
         <h3 className="people__lastName">{people.lastName}</h3>
-        <div className="people__date">{people.date}</div>
+        <div className="people__date" >{people.date}</div>
         <div className="people__dateType">{people.dateType}</div>
         <div className="people__relationship">{people.relationship}</div>
         <div className="people__notes">{people.notes}</div>
+        <button onClick={() => {
+          history.push(`/peoples/edit/${people.id}`)
+        }}>Edit</button>
+        <button onClick={handleRelease}>Delete Person</button>
       </section>
     </fieldset>
     </div>

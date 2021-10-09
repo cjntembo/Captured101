@@ -98,7 +98,7 @@ export const PeopleForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="date"> Date to Remember: </label>
-          <input type="date" id="date" name="date" required autoFocus className="form-control" placeholder="Date to Remember" defaultValue={people.date} onChange={handleControlledInputChange} />
+          <input type="date" id="date" name="date" required autoFocus className="form-control" placeholder="Date to Remember" defaultValue={people.date}  onChange={handleControlledInputChange} />
         </div>
       </fieldset>
       <fieldset>

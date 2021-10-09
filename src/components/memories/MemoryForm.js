@@ -66,7 +66,7 @@ export const MemoryForm = () => {
 
   return (
     <form className="userForm">
-      <h2 className="userForm__title">Users</h2>
+      <h2 className="userForm__title">My Memory</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="memory"> My Memory: </label>

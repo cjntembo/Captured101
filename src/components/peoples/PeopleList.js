@@ -28,12 +28,12 @@ export const PeopleList = () => {
   return(
     <>
       <h1>People</h1>
-
+      <div className="make_people">
       <button onClick={
         () => history.push("/peoples/create")}>
         Create Your Person
       </button>
-
+      </div>
       <div className="peoples">
         {
           filteredPeoples.map(people => {

@@ -28,11 +28,11 @@ export const MemoryList = () => {
   return(
     <>
       <h1>Memories</h1>
-
-      <button onClick={() => history.push("/memories/create")}>
+      <div className="make_mems">
+      <button className="make_mem" onClick={() => history.push("/memories/create")}>
         Make Memory
       </button>
-
+      </div>
       <div className="memories">
         {
           filteredMemories.map(memory => {
