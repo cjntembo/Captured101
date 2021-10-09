@@ -7,11 +7,13 @@ export const PeopleSearch = () => {
 
   return (
     <>
+    <div className="peopleSearch">
       Person search:
       <input type="text"
         className="input--wide"
         onKeyUp={(event) => setSearchTerms(event.target.value)}
         placeholder="Search for A Person's... " />
+    </div>
     </>
   )
 }
